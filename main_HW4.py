@@ -2,10 +2,11 @@
 # Program Filename: ENGR 103 - HW 4
 # Author: Jeyeong You
 # Date: 05.25.2022
-# Description:
-#
-# Input:
-# Output:
+# Description: Calculate the average and maximum wave height/power/period by using given data. Also get the coefficient of
+# variation in signficant wave height in each month in 2021.
+# Input: buoy ID data in 2021, wave height data
+# Output: average and maximum wave height/period/power in each month & the coefficient of variation in significant wave height in each month
+# The WEC efficiency in each month
 ##########################################################################################
 
 # Importing libraries
@@ -56,6 +57,7 @@ print('----------------------Part2-A--------------------------')
 print('----------------------Part2-B--------------------------')
 print(w.find_monthly_data(month_buoy, tp, 1))  # Part2-B
 print('----------------------Part2-C--------------------------')
+# temporarily average and maximum wave height, power, period array
 ave_hgt_tem_array = []
 max_hgt_tem_array = []
 ave_pwr_tem_array = []
@@ -63,6 +65,7 @@ max_pwr_tem_array = []
 ave_period_tem_array = []
 max_period_tem_array = []
 
+# average and maximum wave height in each month in 2021
 for x in range(12):
     ave_wave_height, max_wave_height, ave_wave_power, max_wave_power, ave_wave_period, max_wave_period = w.max_avg_hgt_pwr_period(
         w.find_monthly_data(month_buoy, hs, x + 1), w.find_monthly_data(month_buoy, w.calc_inc_power(hs, tp), x + 1),
@@ -76,14 +79,14 @@ for x in range(12):
 
     print('In month', x+1,'the average wave height is', ave_wave_height,'m, and the max wave height is', max_wave_height,' m.')
 print('--------------------------------------------------------------------')
-
+# average and maximum wave power in each month in 2021
 for x in range(12):
     ave_wave_height, max_wave_height, ave_wave_power, max_wave_power, ave_wave_period, max_wave_period = w.max_avg_hgt_pwr_period(
         w.find_monthly_data(month_buoy, hs, x + 1), w.find_monthly_data(month_buoy, w.calc_inc_power(hs, tp), x + 1), w.find_monthly_data(month_buoy, tp, x + 1))
 
     print('In month', x+1,'the average wave power is', ave_wave_power,'kW/m, and the max wave power is', max_wave_power,' kW/m.')
 print('--------------------------------------------------------------------')
-
+# average and maximum wave period in each month in 2021
 for i in range(12):
     ave_wave_height, max_wave_height, ave_wave_power, max_wave_power, ave_wave_period, max_wave_period = w.max_avg_hgt_pwr_period(
         w.find_monthly_data(month_buoy, hs, i + 1), w.find_monthly_data(month_buoy, w.calc_inc_power(hs, tp), i + 1), w.find_monthly_data(month_buoy, tp, i + 1))
@@ -96,6 +99,7 @@ for i in range(12):
     print('In month', i+1,'the average wave period is', ave_wave_period,'s, and the max wave period is', max_wave_period,' s.')
 
 print('----------------------Part3-A--------------------------')
+# CoV
 Cov_array = []
 
 for d in range(12):
@@ -127,7 +131,7 @@ plt.plot(month_12, max_hgt_tem_array, 'r')
 plt.grid()
 plt.xlabel('Month in 2021')
 plt.ylabel('Wave Height')
-plt.text(1,10,'Red - max wave height / Green - ave wave height')
+plt.text(1, 10, 'Red - max wave height / Green - ave wave height')
 plt.show()
 print('--------------------------------------------------------')
 
@@ -137,7 +141,7 @@ plt.plot(month_12, max_period_tem_array, 'r')
 plt.grid()
 plt.xlabel('Month in 2021')
 plt.ylabel('Wave Period')
-plt.text(2,16,'Red - max wave period / Green - ave wave period')
+plt.text(2, 16, 'Red - max wave period / Green - ave wave period')
 plt.show()
 print('--------------------------------------------------------')
 
@@ -160,7 +164,7 @@ plt.plot(month_12, power_WEC, 'r')
 plt.grid()
 plt.xlabel('Month in 2021')
 plt.ylabel('Wave Power')
-plt.text(3,2050,'Red - the power the WEC / Green - power available')
+plt.text(3, 2050, 'Red - the power the WEC / Green - power available')
 plt.show()
 print('--------------------------------------------------------')
 
